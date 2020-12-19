@@ -1,0 +1,23 @@
+
+bin/kafka-topics.sh --list --bootstrap-server 0.0.0.0:9092
+
+bin/kafka-topics.sh --bootstrap-server 0.0.0.0:9092 --topic debezium.public.customer --delete
+bin/kafka-topics.sh --bootstrap-server 0.0.0.0:9092 --topic debezium_connect_config --delete
+bin/kafka-topics.sh --bootstrap-server 0.0.0.0:9092 --topic debezium_connect_offset --delete
+bin/kafka-topics.sh --bootstrap-server 0.0.0.0:9092 --topic debezium_connect_status --delete
+
+
+bin/kafka-topics.sh --bootstrap-server 0.0.0.0:9092 --topic earth.sellercore.sellerfinance.settlement-debezium.public.settlement_items --delete
+bin/kafka-topics.sh --bootstrap-server 0.0.0.0:9092 --topic seller_core.tx_api.p12.14days.public.payment_statement_settlement_items --delete
+bin/kafka-topics.sh --bootstrap-server 0.0.0.0:9092 --topic seller_finance.debezium.public.settlement_items --delete
+bin/kafka-topics.sh --bootstrap-server 0.0.0.0:9092 --topic seller_finance.settlement_notification_api.paid_settlement_items.seller_id.p12.r14days --delete
+bin/kafka-topics.sh --bootstrap-server 0.0.0.0:9092 --topic seller_finance.slack-alert.message --delete
+
+
+bin/kafka-topics.sh --create --bootstrap-server 0.0.0.0:9092  --partitions 1 --replication-factor 1 --topic debezium_connect_config --config retention.ms=-1
+bin/kafka-topics.sh --create --bootstrap-server 0.0.0.0:9092 --replication-factor 1 --partitions 25 --topic debezium_connect_offset --config retention.ms=-1
+bin/kafka-topics.sh --create --bootstrap-server 0.0.0.0:9092 --replication-factor 1 --partitions 5 --topic debezium_connect_status --config retention.ms=-1
+
+
+bin/kafka-console-consumer.sh --bootstrap-server 0.0.0.0:9092 --from-beginning --topic debezium.public.customers
+bin/kafka-console-consumer.sh --bootstrap-server 192.168.1.6:9092 --from-beginning --topic debezium.public.customers
