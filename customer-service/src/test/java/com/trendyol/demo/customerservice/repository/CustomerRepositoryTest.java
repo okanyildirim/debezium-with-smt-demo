@@ -1,7 +1,8 @@
-package com.okan.yildirim.debeziumwithpostgres.repository;
+package com.trendyol.demo.customerservice.repository;
 
-import com.okan.yildirim.debeziumwithpostgres.domain.Customer;
-import com.okan.yildirim.debeziumwithpostgres.domain.builder.CustomerBuilder;
+import com.trendyol.demo.customerservice.domain.Customer;
+import com.trendyol.demo.customerservice.domain.builder.CustomerBuilder;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -9,8 +10,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.util.Date;
 import java.util.Optional;
-
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @DataJpaTest
 class CustomerRepositoryTest {
@@ -38,12 +37,12 @@ class CustomerRepositoryTest {
         Optional<Customer> foundCustomer = customerRepository.findById(savedCustomer.getId());
         //then
 
-        assertThat(foundCustomer.isPresent()).isTrue();
+        AssertionsForClassTypes.assertThat(foundCustomer.isPresent()).isTrue();
         Customer fetchedCustomer = foundCustomer.get();
-        assertThat(fetchedCustomer.getName()).isEqualTo(customer.getName());
-        assertThat(fetchedCustomer.getSurname()).isEqualTo(customer.getSurname());
-        assertThat(fetchedCustomer.getEmail()).isEqualTo(customer.getEmail());
-        assertThat(fetchedCustomer.getId()).isEqualTo(savedCustomer.getId());
-        assertThat(fetchedCustomer.getBirthday()).isEqualToIgnoringMillis(date);
+        AssertionsForClassTypes.assertThat(fetchedCustomer.getName()).isEqualTo(customer.getName());
+        AssertionsForClassTypes.assertThat(fetchedCustomer.getSurname()).isEqualTo(customer.getSurname());
+        AssertionsForClassTypes.assertThat(fetchedCustomer.getEmail()).isEqualTo(customer.getEmail());
+        AssertionsForClassTypes.assertThat(fetchedCustomer.getId()).isEqualTo(savedCustomer.getId());
+        AssertionsForClassTypes.assertThat(fetchedCustomer.getBirthday()).isEqualToIgnoringMillis(date);
     }
 }
