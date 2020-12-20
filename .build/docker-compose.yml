@@ -1,18 +1,32 @@
 version: '3.7'
 services:
-  postgresql:
+  source_db:
     image: postgres:11.1-alpine
     environment:
       - POSTGRES_USER=debezium
       - POSTGRES_PASSWORD=123qwe
-      - POSTGRES_DB=postgres
+      - POSTGRES_DB=customer
     ports:
       - 5432:5432
     command:
       - "postgres"
       - "-c"
       - "wal_level=logical"
-    container_name: debezium_postgresql
+    container_name: source_db
+
+  target_db:
+    image: postgres:11.1-alpine
+    environment:
+      - POSTGRES_USER=debezium
+      - POSTGRES_PASSWORD=123qwe
+      - POSTGRES_DB=user
+    ports:
+      - 5433:5432
+    command:
+      - "postgres"
+      - "-c"
+      - "wal_level=logical"
+    container_name: target_db
 
   zookeeper:
     container_name: zookeper
@@ -31,7 +45,7 @@ services:
       - zookeeper
     environment:
       - ZOOKEEPER_CONNECT=zookeeper:2181
-      - ADVERTISED_HOST_NAME=192.168.1.6
+      - ADVERTISED_HOST_NAME=192.168.1.7
     volumes:
       - $PWD/list-all-topics.sh:/kafka/list-all-topics.sh
       - $PWD/consume-customers.sh:/kafka/consume-customers.sh
@@ -44,7 +58,7 @@ services:
       - 8083:8083
     links:
       - kafka
-      - postgresql
+      - source_db
     environment:
       - BOOTSTRAP_SERVERS=kafka:9092
       - CONFIG_STORAGE_TOPIC=debezium_connect_config

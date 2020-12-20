@@ -41,6 +41,7 @@ public class Customer implements Serializable {
     private String surname;
     private String email;
     private Date birthday;
+    private boolean active;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -90,6 +91,14 @@ public class Customer implements Serializable {
         this.birthday = birthday;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Customer{");
@@ -99,7 +108,8 @@ public class Customer implements Serializable {
         sb.append(", name='").append(name).append('\'');
         sb.append(", surname='").append(surname).append('\'');
         sb.append(", email='").append(email).append('\'');
-        sb.append(", birthday=").append(birthday);
+        sb.append(", birthday=").append(birthday).append('\'');
+        sb.append(", active=").append(active);
         sb.append('}');
         return sb.toString();
     }

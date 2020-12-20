@@ -32,6 +32,9 @@
             <column name="birthday" type="datetime">
                 <constraints nullable="true"/>
             </column>
+            <column name="active" type="boolean">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
             <sql>ALTER TABLE customers REPLICA IDENTITY FULL;</sql>
     </changeSet>

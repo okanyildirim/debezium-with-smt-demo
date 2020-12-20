@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class DummyCustomerCreator {
 
@@ -48,6 +50,7 @@ public class DummyCustomerCreator {
         customer.setSurname(lastName);
         customer.setEmail(email);
         customer.setBirthday(faker.date().birthday());
+        customer.setActive(false);
 
         return customer;
     }
