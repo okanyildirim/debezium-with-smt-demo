@@ -31,7 +31,6 @@
                 <constraints nullable="true"/>
             </column>
         </createTable>
-            <sql>ALTER TABLE customers REPLICA IDENTITY FULL;</sql>
     </changeSet>
 
 </databaseChangeLog>
