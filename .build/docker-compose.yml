@@ -46,10 +46,6 @@ services:
     environment:
       - ZOOKEEPER_CONNECT=zookeeper:2181
       - ADVERTISED_HOST_NAME=192.168.1.6 # 192.168.1.7
-    volumes:
-      - $PWD/list-all-topics.sh:/kafka/list-all-topics.sh
-      - $PWD/consume-customers.sh:/kafka/consume-customers.sh
-      - $PWD/install-jq.sh:/kafka/install-jq.sh
 
   connect:
     container_name: debezium
