@@ -29,7 +29,7 @@ services:
     container_name: target_db
 
   zookeeper:
-    container_name: zookeper
+    container_name: zookeeper
     image: debezium/zookeeper:1.1
     ports:
       - 2181:2181
@@ -45,7 +45,7 @@ services:
       - zookeeper
     environment:
       - ZOOKEEPER_CONNECT=zookeeper:2181
-      - ADVERTISED_HOST_NAME=192.168.1.7
+      - ADVERTISED_HOST_NAME=192.168.1.6 # 192.168.1.7
     volumes:
       - $PWD/list-all-topics.sh:/kafka/list-all-topics.sh
       - $PWD/consume-customers.sh:/kafka/consume-customers.sh
