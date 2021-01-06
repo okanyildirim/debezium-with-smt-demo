@@ -41,7 +41,7 @@ public class DummyCustomerCreator {
                 .append(name.toLowerCase())
                 .append(".")
                 .append(lastName.toLowerCase())
-                .append(".")
+                .append("@")
                 .append("email.com")
                 .toString();
 

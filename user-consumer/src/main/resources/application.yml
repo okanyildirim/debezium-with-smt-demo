@@ -24,4 +24,5 @@ spring:
     producer:
       bootstrap-servers: localhost:9092
       error-topic: debezium.public.customer.error
-
+server:
+  port: 8081
